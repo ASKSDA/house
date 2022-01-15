@@ -4,5 +4,12 @@ import lombok.Data;
 
 @Data
 public class SupportAddress {
+    private Integer id;
+    private String belongTo;
+    private String enName;
+    private String cnName;
+    private String level;
+    private Double baiduMapLng;
+    private Double baiduMapLat;
 
 }
