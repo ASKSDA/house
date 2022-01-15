@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace后面写的是这个映射文件对应接口的包和接口名-->
+<mapper namespace="com.example.house.mapper.RoleMapper">
+    <resultMap id="roleResultMap" type="com.example.house.domain.Role">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+<!--    int save(Role role);-->
+<!--    List<Role> findRoleByUserId(Long userId);-->
+    <insert id="save" parameterType="com.example.house.domain.Role" useGeneratedKeys="true" keyProperty="id">
+        insert into role(user_id, name) values (#{userId}, #{name})
+    </insert>
+
+    <select id="findRoleByUserId" parameterType="java.lang.Long" resultMap="roleResultMap">
+        select * from role where user_id = #{userId}
+    </select>
+
+</mapper>
