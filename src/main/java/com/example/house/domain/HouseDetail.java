@@ -13,7 +13,7 @@ public class HouseDetail {
     private String address;
     private Integer subwayLineId;
     private String subwayLineName;
-    private Integer subwayStation;
+    private Integer subwayStationId;
     private String subwayStationName;
     private Integer houseId;
 }

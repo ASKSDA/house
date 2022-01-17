@@ -6,4 +6,18 @@ import com.example.house.form.HouseForm;
 
 public interface IHouseService {
     ServiceResult<HouseDTO> save(HouseForm houseForm);
+
+    ServiceResult update(HouseForm houseForm);
+
+    ServiceResult<HouseDTO> findCompleteOne(Long id);
+
+    ServiceResult addTag(Long houseId, String tag);
+
+    ServiceResult removeTag(Long houseId, String tag);
+
+    ServiceResult updateStatus(Long id, int status);
+
+    ServiceResult removePhoto(Long id);
+
+    ServiceResult updateCover(Long coverId, Long targetId);
 }
