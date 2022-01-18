@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace后面写的是这个映射文件对应接口的包和接口名-->
+<mapper namespace="com.example.house.mapper.HouseDetailMapper">
+    <resultMap id="houseDetailResultMap" type="com.example.house.domain.HouseDetail">
+        <id property="id" column="id"/>
+        <result property="description" column="description"/>
+        <result property="layoutDesc" column="layout_desc"/>
+        <result property="traffic" column="traffic"/>
+        <result property="roundService" column="round_service"/>
+        <result property="rentWay" column="rent_way"/>
+        <result property="address" column="address"/>
+        <result property="subwayLineId" column="subway_line_id"/>
+        <result property="subwayLineName" column="subway_line_name"/>
+        <result property="subwayStationId" column="subway_station_id"/>
+        <result property="subwayStationName" column="subway_station_name"/>
+        <result property="houseId" column="house_id"/>
+    </resultMap>
+<!--    HouseDetail findByHouseId(Long houseId);-->
+<!--    List<HouseDetail> findAllByHouseIdIn(List<Long> houseIds);-->
+<!--    int save(HouseDetail houseDetail);-->
+
+    <select id="findByHouseId" parameterType="java.lang.Long" resultMap="houseDetailResultMap">
+        select * from house_detail where house_id = #{houseId}
+    </select>
+
+    <select id="findAllByHouseIdIn" parameterType="java.lang.Long" resultMap="houseDetailResultMap">
+        select * from house_detail where in
+        <foreach collection="houseIdList" item="houseId" index="index" open="(" separator="," close=")">
+            #{houseId}
+        </foreach>
+    </select>
+
+    <insert id="save" parameterType="com.example.house.domain.HouseDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into house_detail (description, layout_desc, traffic, round_service, rent_way, address, subway_line_id, subway_line_name, subway_station_id, subway_station_name, house_id)
+        values (#{description},#{layoutDesc},#{traffic},#{roundService},#{rentWay},#{address},#{subwayLineId},#{subwayLineName},#{subwayStationId},#{subwayStationName},#{houseId})
+    </insert>
+
+</mapper>

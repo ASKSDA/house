@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace后面写的是这个映射文件对应接口的包和接口名-->
+<mapper namespace="com.example.house.mapper.HouseMapper">
+    <resultMap id="houseResultMap" type="com.example.house.domain.Role">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+<!--    int updateCover(@Param(value="id") Long id, @Param(value = "cover") String cover);-->
+<!--    int updateStatus(@Param(value="id") Long id, @Param(value = "status") int status);-->
+<!--    int updateWatchTimes(@Param(value="id") Long houseId);-->
+<!--    int save(House house);-->
+<!--    House findOne(Long id);-->
+<!--    List<House> findAll();-->
+<!--    List<House> findByDatatableSearch(DatatableSearch searchBody);-->
+
+    <update id="updateCover" >
+        update house set cover = #{cover} where id = #{id}
+    </update>
+
+    <update id="updateStatus" >
+        update house set status = #{status} where id = #{id}
+    </update>
+
+    <update id="updateWatchTimes" >
+        update house set watch_times  = watch_times + 1 where id = #{id}
+    </update>
+
+   <insert id="save" parameterType="com.example.house.domain.House">
+       insert into house ( title, price, area, room, floor, total_floor, watch_times, build_year, status, create_time, last_update_time, city_en_name, region_en_name, cover, direction, distance_to_subway, parlour, district, admin_id, bathroom, street)
+       values (#{title},#{price},#{area},#{room},#{floor},#{totalFloor},#{watchTimes},#{buildYear},#{status},#{creatTime},#{lastUpdateTime},#{cityEnName},#{regionEnName},#{cover},#{direction},#{distanceToSubway},#{parlour},#{district},#{adminId},#{bathroom},#{street})
+   </insert>
+
+    <select id="findOne" parameterType="java.lang.Long" resultMap="houseResultMap">
+        select * from house where id =#{id}
+    </select>
+
+    <select id="findAll"  resultMap="houseResultMap">
+        select * from house
+    </select>
+
+    <select id="findByDatatableSearch" parameterType="com.example.house.form.DatatableSearch" resultMap="houseResultMap">
+        select * from house where
+    </select>
+
+</mapper>
