@@ -8,10 +8,10 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @Configuration
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400)
 public class RedisSessionConfig {
     @Bean
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory){
-    return new StringRedisTemplate(factory);
-
+    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
+        return new StringRedisTemplate(factory);
     }
 }
