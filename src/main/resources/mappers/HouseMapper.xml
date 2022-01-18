@@ -41,8 +41,8 @@
         select * from house
     </select>
 
-    <select id="findByDatatableSearch" parameterType="com.example.house.form.DatatableSearch" resultMap="houseResultMap">
-        select * from house where
-    </select>
+<!--    <select id="findByDatatableSearch" parameterType="com.example.house.form.DatatableSearch" resultMap="houseResultMap">-->
+<!--        select * from house where-->
+<!--    </select>-->
 
 </mapper>

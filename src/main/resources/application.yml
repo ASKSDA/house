@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    username:tom
+    password:123456
+    url:jdbc:mysql://localhost:3306/tast
+    driver-class-name:com.mysql.cj.jdbc.Driver
+  kafka:
+    bootstrap-servers:localhost:9092
+    consumer:
+      group-id: house
+  session:
+    store-type: redis
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      jedis:
+        pool:
+          min-idle: 1
+      timeout: 3000
+
+mybatis:
+  mapper-locations:classpath:mappers/*.xml
+
+
+qiniu:
+  AccessKey: knAem3kRIJ24AYy3LGxwGwEboI2C5MgdgjqncwYr
+  SecretKey: qJ4OscEzYZKTYnu90nlNJNNEkeWfMMIHJp84C-f6
+  Bucket: house-xiangmu
+  cdn:
+    prefix:r5oeo2ybf.hb-bkt.clouddn.com
+
+
+
+
+
