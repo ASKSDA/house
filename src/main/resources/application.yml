@@ -1,11 +1,11 @@
 spring:
   datasource:
-    username:tom
-    password:123456
-    url:jdbc:mysql://localhost:3306/tast
-    driver-class-name:com.mysql.cj.jdbc.Driver
+    username: tom
+    password: 123456
+    url:jdbc: mysql://localhost:3306/tast
+    driver-class-name: com.mysql.cj.jdbc.Driver
   kafka:
-    bootstrap-servers:localhost:9092
+    bootstrap-servers:localhost : 9092
     consumer:
       group-id: house
   session:
@@ -20,7 +20,7 @@ spring:
       timeout: 3000
 
 mybatis:
-  mapper-locations:classpath:mappers/*.xml
+  mapper-locations: classpath:mappers/*.xml
 
 
 qiniu:
@@ -28,7 +28,15 @@ qiniu:
   SecretKey: qJ4OscEzYZKTYnu90nlNJNNEkeWfMMIHJp84C-f6
   Bucket: house-xiangmu
   cdn:
-    prefix:r5oeo2ybf.hb-bkt.clouddn.com
+    prefix: r5oeo2ybf.hb-bkt.clouddn.com
+
+server:
+  port: 9999
+
+#logging:
+#  level:
+#    com:
+#      example:
 
 
 

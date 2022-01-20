@@ -48,7 +48,7 @@ public class HouseServiceImpl implements IHouseService {
     private IQiNiuService iQiNiuService;
 
 
-    @Value("${qiniu.cdn.prefix}")
+    @Value("qiniu.cdn.prefix")
     private String cdnPrefix;
 
 
