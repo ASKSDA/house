@@ -3,6 +3,8 @@ package com.example.house;
 import com.example.house.domain.User;
 import com.example.house.mapper.RoleMapper;
 import com.example.house.mapper.UserMapper;
+import com.example.house.service.users.ISmsService;
+import com.example.house.service.users.impl.SmsServiceImpl;
 import com.example.house.service.users.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ class HouseApplicationTests {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private SmsServiceImpl smsService;
+
+    @Autowired
     private UserServiceImpl userService;
 
     @Autowired
@@ -27,8 +32,9 @@ class HouseApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(passwordEncoder.encode("admin"));
-        System.out.println(passwordEncoder.encode("123456"));
+        //System.out.println(passwordEncoder.encode("admin"));
+        //System.out.println(passwordEncoder.encode("724441"));
+        smsService.sendSms("13831684810");
 
     }
 
@@ -56,6 +62,9 @@ class HouseApplicationTests {
         System.out.println(roleMapper.findRoleByUserId(1L));
     }
 
-
+    @Test
+    void a(){
+        smsService.remove("13831684810");
+    }
 
 }
