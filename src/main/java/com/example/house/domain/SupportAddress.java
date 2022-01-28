@@ -9,8 +9,8 @@ public class SupportAddress {
     private String enName;
     private String cnName;
     private String level;
-    private Double baiduMapLongitude;
-    private Double baiduMapLatitude;
+    private Double baiduMapLng;
+    private Double baiduMapLat;
     public enum Level{
         CITY("city"),
         REGION("region");

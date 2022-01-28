@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace后面写的是这个映射文件对应接口的包和接口名-->
+<mapper namespace="com.example.house.mapper.HousePictureMapper">
+    <resultMap id="housePictureResultMap" type="com.example.house.domain.HousePicture">
+        <id property="id" column="id"/>
+        <result property="houseId" column="house_id"/>
+        <result property="cdnPrefix" column="cdn_prefix"/>
+        <result property="width" column="width"/>
+        <result property="height" column="height"/>
+        <result property="location" column="location"/>
+        <result property="path" column="path"/>
+    </resultMap>
+    <!--    List<HousePicture> findAllByHouseId(Long id);-->
+    <!--    int save(List<HousePicture> housePictures);-->
+    <!--    HousePicture findOne(Long id);-->
+    <!--    int delete(Long id);-->
+    <select id="findAllByHouseId" parameterType="java.lang.Long" resultMap="housePictureResultMap">
+        select * from house_picture where id = #{id}
+    </select>
+
+<!--    <insert id="save" parameterType="com.example.house.domain.HousePicture" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into house_picture (house_id, cdn_prefix, width, height, location, path)-->
+<!--        values-->
+<!--        <foreach collection="housePictures" item="housePicture" index="index" open="(" separator="," close=")">-->
+<!--            (#{housePicture.houseId},#{housePicture.cdnPrefix},#{housePicture.width},#{housePicture.height},#{housePicture.location},#{housePicture.path}-->
+<!--        </foreach>-->
+<!--    </insert>-->
+
+    <select id="findOne" parameterType="java.lang.Long" resultMap="housePictureResultMap">
+        select * from house_picture where id = #{id}
+    </select>
+
+    <update id="delete" parameterType="java.lang.Long">
+        delete  from house_picture where id = #{id}
+    </update>
+
+</mapper>

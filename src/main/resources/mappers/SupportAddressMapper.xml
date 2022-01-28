@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace后面写的是这个映射文件对应接口的包和接口名-->
+<mapper namespace="com.example.house.mapper.SupportAddressMapper">
+    <resultMap id="supportAddressResultMap" type="com.example.house.domain.SupportAddress">
+        <id property="id" column="id"/>
+        <result property="belongTo" column="belong_to"/>
+        <result property="enName" column="en_name"/>
+        <result property="cnName" column="cn_name"/>
+        <result property="level" column="level"/>
+        <result property="baiduMapLng" column="baidu_map_lng"/>
+        <result property="baiduMapLat" column="baidu_map_lat"/>
+    </resultMap>
+<!--    List<SupportAddress> findAllByLevel(String level);-->
+<!--    SupportAddress findByEnNameAndLevel(@Param("enName") String enName, @Param("level") String level);-->
+<!--    SupportAddress findByEnNameAndBelongTo(@Param("enName") String enName, @Param("belongTo") String belongTo);-->
+<!--    List<SupportAddress> findAllByLevelAndBelongTo(@Param("level")String level, @Param("belongTo") String belongTo);-->
+
+    <select id="findAllByLevel" parameterType="java.lang.String" resultMap="supportAddressResultMap">
+        select * from support_address where level=#{level}
+    </select>
+
+    <select id="findByEnNameAndLevel"  resultMap="supportAddressResultMap">
+        select id, belong_to, en_name, cn_name, level, baidu_map_lng, baidu_map_lat from support_address where en_name=#{enName} and level=#{level}
+    </select>
+
+    <select id="findByEnNameAndBelongTo"  resultMap="supportAddressResultMap">
+        select id, belong_to, en_name, cn_name, level, baidu_map_lng, baidu_map_lat from support_address where en_name=#{enName} and belong_to=#{belongTo}
+    </select>
+
+    <select id="findAllByLevelAndBelongTo"  resultMap="supportAddressResultMap">
+        select * from support_address where level=#{level} and belong_to=#{belongTo}
+    </select>
+
+
+
+</mapper>

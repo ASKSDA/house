@@ -12,4 +12,5 @@ public interface SupportAddressMapper {
     List<SupportAddress> findAllByLevel(String level);
     SupportAddress findByEnNameAndLevel(@Param("enName") String enName, @Param("level") String level);
     SupportAddress findByEnNameAndBelongTo(@Param("enName") String enName, @Param("belongTo") String belongTo);
+    List<SupportAddress> findAllByLevelAndBelongTo(@Param("level")String level, @Param("belongTo") String belongTo);
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace后面写的是这个映射文件对应接口的包和接口名-->
+<mapper namespace="com.example.house.mapper.HouseTagMapper">
+    <resultMap id="houseTagResultMap" type="com.example.house.domain.HouseTag">
+        <id property="id" column="id"/>
+        <result property="houseId" column="house_id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+<!--    HouseTag findByNameAndHouseId(@Param("name") String name, @Param("houseId") Long houseId);-->
+<!--    List<HouseTag> findAllByHouseId(Long id);-->
+<!--    List<HouseTag> findAllByHouseIdIn(List<Long> houseIds);-->
+<!--    int save(List<HouseTag> houseTags);-->
+<!--    int delete(Long id);-->
+    <select id="findByNameAndHouseId" resultMap="houseTagResultMap">
+        select * from house_tag where house_id =#{houseId} and name=#{name}
+    </select>
+
+    <select id="findAllByHouseId" parameterType="java.lang.Long" resultMap="houseTagResultMap">
+        select * from house_tag where id =#{id}
+    </select>
+
+    <select id="findAllByHouseIdIn" parameterType="java.lang.Long" resultMap="houseTagResultMap">
+        select * from house_tag where house_id in
+        <foreach collection="houseIds" item="houseId" index="index" open="(" separator="," close=")">
+            #{houseId}
+        </foreach>
+    </select>
+
+    <update id="save" parameterType="com.example.house.domain.HouseTag" useGeneratedKeys="true" keyProperty="id">
+        insert into house_tag (house_id, name) values
+        <foreach collection="houseTags" item="houseTag" separator=",">
+            (#{houseTag.houseId}, #{houseTag.name})
+        </foreach>
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long" >
+       delete from house_tag where id =#{id}
+    </update>
+</mapper>

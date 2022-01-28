@@ -1,8 +1,7 @@
 package com.example.house;
 
-import com.example.house.domain.User;
-import com.example.house.mapper.RoleMapper;
-import com.example.house.mapper.UserMapper;
+import com.example.house.domain.*;
+import com.example.house.mapper.*;
 import com.example.house.service.users.ISmsService;
 import com.example.house.service.users.impl.SmsServiceImpl;
 import com.example.house.service.users.impl.UserServiceImpl;
@@ -12,9 +11,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 class HouseApplicationTests {
+    @Autowired
+    private SupportAddressMapper supportAddressMapper;
+
+    @Autowired
+    private SubwayMapper subwayMapper;
+
+    @Autowired
+    private HouseTagMapper houseTagMapper;
+
+    @Autowired
+    private HouseSubscribeMapper houseSubscribeMapper;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -23,6 +36,9 @@ class HouseApplicationTests {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private HouseMapper houseMapper;
 
     @Autowired
     private UserMapper userMapper;
@@ -64,7 +80,35 @@ class HouseApplicationTests {
 
     @Test
     void a(){
-        smsService.remove("13831684810");
+        System.out.println(houseSubscribeMapper.updateStatus(1L,7));
     }
 
+    @Test
+    void b(){
+        List<HouseTag> ls = new ArrayList<>();
+        HouseTag houseTag = new HouseTag();
+        houseTag.setName("燕郊");
+        houseTag.setHouseId(10);
+        ls.add(0,houseTag);
+        HouseTag houseTag1 = new HouseTag();
+        houseTag1.setName("大厂");
+        houseTag1.setHouseId(11);
+        ls.add(1,houseTag1);
+        HouseTag houseTag2 = new HouseTag();
+        houseTag2.setName("夏垫");
+        houseTag2.setHouseId(12);
+        ls.add(2,houseTag2);
+
+        System.out.println(houseTagMapper.save(ls));
+    }
+
+    @Test
+    void c(){
+        System.out.println(subwayMapper.findOne(2L));
+    }
+
+    @Test
+    void d(){
+        System.out.println(supportAddressMapper.findAllByLevelAndBelongTo("city","hb"));
+    }
 }

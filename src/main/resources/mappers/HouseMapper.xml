@@ -2,10 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace后面写的是这个映射文件对应接口的包和接口名-->
 <mapper namespace="com.example.house.mapper.HouseMapper">
-    <resultMap id="houseResultMap" type="com.example.house.domain.Role">
+    <resultMap id="houseResultMap" type="com.example.house.domain.House">
         <id property="id" column="id"/>
-        <result property="userId" column="user_id"/>
-        <result property="name" column="name"/>
+        <result property="title" column="title"/>
+        <result property="price" column="price"/>
+        <result property="area" column="area"/>
+        <result property="room" column="room"/>
+        <result property="floor" column="floor"/>
+        <result property="totalFloor" column="total_floor"/>
+        <result property="watchTimes" column="watch_times"/>
+        <result property="buildYear" column="build_year"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="lastUpdateTime" column="last_update_time"/>
+        <result property="cityEnName" column="city_en_name"/>
+        <result property="regionEnName" column="region_en_name"/>
+        <result property="cover" column="cover"/>
+        <result property="direction" column="direction"/>
+        <result property="distanceToSubway" column="distance_to_subway"/>
+        <result property="parlour" column="parlour"/>
+        <result property="district" column="district"/>
+        <result property="adminId" column="admin_id"/>
+        <result property="bathroom" column="bathroom"/>
+        <result property="street" column="street"/>
     </resultMap>
 
 <!--    int updateCover(@Param(value="id") Long id, @Param(value = "cover") String cover);-->
@@ -30,7 +49,7 @@
 
    <insert id="save" parameterType="com.example.house.domain.House">
        insert into house ( title, price, area, room, floor, total_floor, watch_times, build_year, status, create_time, last_update_time, city_en_name, region_en_name, cover, direction, distance_to_subway, parlour, district, admin_id, bathroom, street)
-       values (#{title},#{price},#{area},#{room},#{floor},#{totalFloor},#{watchTimes},#{buildYear},#{status},#{creatTime},#{lastUpdateTime},#{cityEnName},#{regionEnName},#{cover},#{direction},#{distanceToSubway},#{parlour},#{district},#{adminId},#{bathroom},#{street})
+       values (#{title},#{price},#{area},#{room},#{floor},#{totalFloor},#{watchTimes},#{buildYear},#{status},#{createTime},#{lastUpdateTime},#{cityEnName},#{regionEnName},#{cover},#{direction},#{distanceToSubway},#{parlour},#{district},#{adminId},#{bathroom},#{street})
    </insert>
 
     <select id="findOne" parameterType="java.lang.Long" resultMap="houseResultMap">
