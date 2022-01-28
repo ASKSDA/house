@@ -2,6 +2,7 @@ package com.example.house;
 
 import com.example.house.domain.*;
 import com.example.house.mapper.*;
+import com.example.house.service.house.impl.AddressServiceImpl;
 import com.example.house.service.users.ISmsService;
 import com.example.house.service.users.impl.SmsServiceImpl;
 import com.example.house.service.users.impl.UserServiceImpl;
@@ -16,6 +17,9 @@ import java.util.List;
 
 @SpringBootTest
 class HouseApplicationTests {
+    @Autowired
+    private AddressServiceImpl addressService;
+
     @Autowired
     private SupportAddressMapper supportAddressMapper;
 
@@ -85,21 +89,8 @@ class HouseApplicationTests {
 
     @Test
     void b(){
-        List<HouseTag> ls = new ArrayList<>();
-        HouseTag houseTag = new HouseTag();
-        houseTag.setName("燕郊");
-        houseTag.setHouseId(10);
-        ls.add(0,houseTag);
-        HouseTag houseTag1 = new HouseTag();
-        houseTag1.setName("大厂");
-        houseTag1.setHouseId(11);
-        ls.add(1,houseTag1);
-        HouseTag houseTag2 = new HouseTag();
-        houseTag2.setName("夏垫");
-        houseTag2.setHouseId(12);
-        ls.add(2,houseTag2);
+        System.out.println(addressService.findAllRegionsByCityName("sjz"));
 
-        System.out.println(houseTagMapper.save(ls));
     }
 
     @Test
@@ -110,5 +101,10 @@ class HouseApplicationTests {
     @Test
     void d(){
         System.out.println(supportAddressMapper.findAllByLevelAndBelongTo("city","hb"));
+    }
+
+    @Test
+    void e(){
+        System.out.println(addressService.findAllCities());
     }
 }

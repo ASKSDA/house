@@ -3,23 +3,40 @@ package com.example.house.controller;
 import com.example.house.base.ApiResponse;
 import com.example.house.base.QiNiuPutRet;
 import com.example.house.base.ServiceResult;
+import com.example.house.domain.SupportAddress;
+import com.example.house.dto.HouseDTO;
+import com.example.house.dto.SupportAddressDTO;
 import com.example.house.dto.UserDTO;
+import com.example.house.form.HouseForm;
+import com.example.house.service.house.impl.AddressServiceImpl;
+import com.example.house.service.house.impl.HouseServiceImpl;
 import com.example.house.service.house.impl.QiNiuServiceImpl;
 import com.example.house.service.users.impl.UserServiceImpl;
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
+import com.qiniu.storage.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 @Controller
 public class AdminController {
+    @Autowired
+    private HouseServiceImpl houseService;
+
+    @Autowired
+    private AddressServiceImpl addressService;
+
     @Autowired
     private UserServiceImpl userService;
 
@@ -88,5 +105,27 @@ public class AdminController {
             return ApiResponse.ofSuccess(serviceResult.getResult());
         }
 
+    }
+
+    @PostMapping("admin/add/house")
+    @ResponseBody
+    public ApiResponse addHouse(@Valid @ModelAttribute("form-house-add") HouseForm houseForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return new ApiResponse(HttpStatus.BAD_REQUEST.value(), bindingResult.getAllErrors().get(0).getDefaultMessage(),null);
+        }
+        if(houseForm.getPhotos() == null || houseForm.getCover() == null){
+            return ApiResponse.ofMessage(HttpStatus.BAD_REQUEST.value(),"必须上传图片");
+        }
+
+        Map<SupportAddress.Level, SupportAddressDTO> addressMap = addressService.findCityAndRegion(houseForm.getCityEnName(),houseForm.getRegionEnName());
+        if(addressMap.keySet().size() !=2){
+            return ApiResponse.ofStatus(ApiResponse.Status.NOT_VALID_PARAM);
+        }
+
+        ServiceResult<HouseDTO> result = houseService.save(houseForm);
+        if(result.isSuccess()){
+            return ApiResponse.ofSuccess(result.getResult());
+        }
+        return ApiResponse.ofSuccess(ApiResponse.Status.NOT_VALID_PARAM);
     }
 }

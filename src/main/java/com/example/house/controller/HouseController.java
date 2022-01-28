@@ -7,6 +7,7 @@ import com.example.house.service.house.impl.AddressServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -22,5 +23,15 @@ public class HouseController {
             return ApiResponse.ofStatus(ApiResponse.Status.NOT_FOUND);
         }
         return ApiResponse.ofSuccess(result.getResult());
+    }
+
+    @RequestMapping("address/support/regions")
+    @ResponseBody
+    public ApiResponse getSupportRegions(@RequestParam(name="city_name") String cityName){
+        ServiceMultiResult<SupportAddressDTO> addressResult = addressService.findAllRegionsByCityName(cityName);
+        if(addressResult.getResult() == null){
+            return ApiResponse.ofStatus(ApiResponse.Status.NOT_FOUND);
+        }
+        return ApiResponse.ofSuccess(addressResult.getResult());
     }
 }

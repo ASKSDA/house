@@ -7,6 +7,7 @@ import com.example.house.domain.SupportAddress;
 import com.example.house.dto.SubwayDTO;
 import com.example.house.dto.SubwayStationDTO;
 import com.example.house.dto.SupportAddressDTO;
+import com.example.house.form.HouseForm;
 import com.example.house.mapper.SubwayMapper;
 import com.example.house.mapper.SubwayStationMapper;
 import com.example.house.mapper.SupportAddressMapper;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AddressServiceImpl implements IAddressService {
@@ -81,4 +83,11 @@ public class AddressServiceImpl implements IAddressService {
          return result;
         }
     }
+
+    @Override
+    public Map<SupportAddress.Level, SupportAddressDTO> findCityAndRegion(String cityEnName, String regionEnName) {
+        return null;
+    }
+
+
 }
