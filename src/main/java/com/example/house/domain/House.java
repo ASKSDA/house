@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class House {
-    private Integer id;
+    private Long id;
     private String title;
     private Integer price;
     private Integer area;
@@ -25,7 +25,7 @@ public class House {
     private Integer distanceToSubway;
     private Integer parlour;
     private String district;
-    private Integer adminId;
+    private Long adminId;
     private Integer bathroom;
     private String street;
 }

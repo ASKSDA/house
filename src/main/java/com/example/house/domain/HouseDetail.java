@@ -4,16 +4,17 @@ import lombok.Data;
 
 @Data
 public class HouseDetail {
-    private Integer id;
+    private Long id;
+    private Long houseId;
     private String description;
     private String layoutDesc;
     private String traffic;
     private String roundService;
     private Integer rentWay;
     private String address;
-    private Integer subwayLineId;
+    private Long subwayLineId;
     private String subwayLineName;
-    private Integer subwayStationId;
+    private Long subwayStationId;
     private String subwayStationName;
-    private Integer houseId;
+
 }

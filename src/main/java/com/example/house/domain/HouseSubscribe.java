@@ -6,14 +6,14 @@ import java.time.LocalDateTime;
 
 @Data
 public class HouseSubscribe {
-    private Integer id;
-    private Integer houseId;
-    private Integer userId;
+    private Long id;
+    private Long houseId;
+    private Long userId;
     private String desc;
     private Integer status;
     private LocalDateTime creatTime;
     private LocalDateTime lastUpdateTime;
     private LocalDateTime orderTime;
     private String telephone;
-    private Integer adminId;
+    private Long adminId;
 }

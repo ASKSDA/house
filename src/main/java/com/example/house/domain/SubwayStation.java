@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SubwayStation {
-    private Integer id;
-    private Integer subwayId;
+    private Long id;
+    private Long subwayId;
     private String name;
 }

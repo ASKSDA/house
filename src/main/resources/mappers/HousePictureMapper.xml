@@ -19,13 +19,13 @@
         select * from house_picture where id = #{id}
     </select>
 
-<!--    <insert id="save" parameterType="com.example.house.domain.HousePicture" useGeneratedKeys="true" keyProperty="id">-->
-<!--        insert into house_picture (house_id, cdn_prefix, width, height, location, path)-->
-<!--        values-->
-<!--        <foreach collection="housePictures" item="housePicture" index="index" open="(" separator="," close=")">-->
-<!--            (#{housePicture.houseId},#{housePicture.cdnPrefix},#{housePicture.width},#{housePicture.height},#{housePicture.location},#{housePicture.path}-->
-<!--        </foreach>-->
-<!--    </insert>-->
+    <insert id="save" parameterType="com.example.house.domain.HousePicture" useGeneratedKeys="true" keyProperty="id">
+        insert into house_picture (house_id, cdn_prefix, width, height, location, path)
+        values
+        <foreach collection="housePictures" item="housePicture" index="index" open="(" separator="," close=")">
+            (#{housePicture.houseId},#{housePicture.cdnPrefix},#{housePicture.width},#{housePicture.height},#{housePicture.location},#{housePicture.path}
+        </foreach>
+    </insert>
 
     <select id="findOne" parameterType="java.lang.Long" resultMap="housePictureResultMap">
         select * from house_picture where id = #{id}

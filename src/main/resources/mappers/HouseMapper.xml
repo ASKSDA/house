@@ -47,7 +47,7 @@
         update house set watch_times  = watch_times + 1 where id = #{id}
     </update>
 
-   <insert id="save" parameterType="com.example.house.domain.House">
+   <insert id="save" parameterType="com.example.house.domain.House" useGeneratedKeys="true" keyProperty="id">
        insert into house ( title, price, area, room, floor, total_floor, watch_times, build_year, status, create_time, last_update_time, city_en_name, region_en_name, cover, direction, distance_to_subway, parlour, district, admin_id, bathroom, street)
        values (#{title},#{price},#{area},#{room},#{floor},#{totalFloor},#{watchTimes},#{buildYear},#{status},#{createTime},#{lastUpdateTime},#{cityEnName},#{regionEnName},#{cover},#{direction},#{distanceToSubway},#{parlour},#{district},#{adminId},#{bathroom},#{street})
    </insert>
@@ -60,8 +60,18 @@
         select * from house
     </select>
 
-<!--    <select id="findByDatatableSearch" parameterType="com.example.house.form.DatatableSearch" resultMap="houseResultMap">-->
-<!--        select * from house where-->
-<!--    </select>-->
+    <select id="findByDatatableSearch" parameterType="com.example.house.form.DatatableSearch" resultMap="houseResultMap">
+        select * from house
+        <where>
+            <if test="city != null">
+                and city_en_name = #{city}
+            </if>
+            <if test="createTimeMin != null">
+                and create_time > #{createTimeMin}
+            </if>
+
+        </where>
+        order by create_time
+</select>
 
 </mapper>
